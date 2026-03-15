@@ -475,11 +475,14 @@ const App: React.FC = () => {
 
         {/* Footer */}
         <footer className="relative border-t border-slate-200/50 py-6 mt-8">
-          <div className="max-w-7xl mx-auto px-6 text-center">
+          <div className="max-w-7xl mx-auto px-6 text-center space-y-2">
             <div className="flex items-center justify-center gap-2 text-sm text-slate-500">
               <Brain className="w-4 h-4" />
               <span>Propulsé par Google Gemini AI</span>
             </div>
+            <p className="text-xs text-slate-400 font-medium tracking-wide uppercase">
+              Créé par Azhar
+            </p>
           </div>
         </footer>
       </div>
@@ -604,7 +607,7 @@ const App: React.FC = () => {
         </main>
 
         {/* Input Area */}
-        {selectedMode === 'chat' && (
+        {selectedMode === 'chat' ? (
           <footer className="bg-white/80 backdrop-blur-xl border-t border-slate-200/50 p-4">
             <form onSubmit={handleSendMessage} className="max-w-4xl mx-auto flex items-center gap-3">
               <input
@@ -625,6 +628,17 @@ const App: React.FC = () => {
                 <span className="hidden sm:inline">Envoyer</span>
               </button>
             </form>
+            <div className="text-center mt-3">
+              <p className="text-[10px] text-slate-400 font-medium tracking-widest uppercase">
+                Créé par Azhar
+              </p>
+            </div>
+          </footer>
+        ) : (
+          <footer className="bg-white/80 backdrop-blur-xl border-t border-slate-200/50 p-2 text-center">
+            <p className="text-[10px] text-slate-400 font-medium tracking-widest uppercase">
+              Créé par Azhar
+            </p>
           </footer>
         )}
       </div>
