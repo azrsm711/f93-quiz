@@ -256,7 +256,7 @@ const App: React.FC = () => {
           <h1 className="mt-10 text-6xl font-black tracking-tighter uppercase bg-gradient-to-r from-[#cba6f7] to-[#89b4fa] bg-clip-text text-transparent drop-shadow-sm">
             F93 Quiz
           </h1>
-          <p className="mt-4 text-[#a6adc8] text-sm font-medium uppercase tracking-[0.3em] opacity-80">Nursing Excellence • v2.4.2</p>
+          <p className="mt-4 text-[#a6adc8] text-sm font-medium uppercase tracking-[0.3em] opacity-80">Excellence Infirmière</p>
         </header>
 
         <main className="flex-1 overflow-y-auto px-6 pb-16">
