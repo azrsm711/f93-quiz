@@ -1,5 +1,5 @@
 {
   "name": "F93 Quiz",
-  "description": "Application de quiz pour l'examen F93 - Soins infirmiers (Cardiologie, Diabète, MPOC, Soins périopératoires, Dispositifs d'accès vasculaire).",
+  "description": "Application de quiz interactive pour les soins infirmiers (Cardiologie, Diabète, MPOC, Soins périopératoires, Dispositifs d'accès vasculaire). Thème Catppuccin Mocha.",
   "requestFramePermissions": []
 }

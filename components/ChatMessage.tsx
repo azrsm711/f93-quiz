@@ -20,16 +20,14 @@ const fontSizeClasses = {
   lg: 'text-base sm:text-lg'
 };
 
-// Clean markdown text by removing stray separators and normalizing
 const cleanText = (text: string): string => {
   return text
-    .replace(/^\*\*\*+$/gm, '') // Remove *** separator lines
-    .replace(/^\s*[\r\n]/gm, '\n') // Remove multiple blank lines
-    .replace(/\n{3,}/g, '\n\n') // Normalize to max 2 line breaks
+    .replace(/^\*\*\*+$/gm, '')
+    .replace(/^\s*[\r\n]/gm, '\n')
+    .replace(/\n{3,}/g, '\n\n')
     .trim();
 };
 
-// Parse bot message to extract QCM question and options
 export const parseQCM = (text: string): ParsedQCM => {
   const lines = text.split('\n').filter(line => line.trim());
   const options: { letter: string; text: string }[] = [];
@@ -46,15 +44,8 @@ export const parseQCM = (text: string): ParsedQCM => {
     }
   }
 
-  // Valid QCM must have exactly 4 options
   const isQCM = options.length === 4;
-  let question = questionLines.join(' ').trim();
-  
-  // Clean up if the question string accidentally contains the feedback from the previous answer
-  const qIndex = question.search(/Question\s*:/i);
-  if (qIndex > -1) {
-    question = question.substring(qIndex).replace(/Question\s*:/i, '').trim();
-  }
+  const question = questionLines.join(' ').trim();
 
   return { question, options, isQCM };
 };
@@ -66,36 +57,36 @@ export const ChatMessage: React.FC<ChatMessageProps> = ({ message, fontSize = 'b
 
   return (
     <motion.div
-      initial={{ opacity: 0, y: 10, scale: 0.95 }}
+      initial={{ opacity: 0, y: 20, scale: 0.95 }}
       animate={{ opacity: 1, y: 0, scale: 1 }}
       transition={{
         type: "spring",
-        stiffness: 260,
-        damping: 20
+        stiffness: 400,
+        damping: 30
       }}
       className={`flex w-full mb-4 ${isBot ? 'justify-start' : 'justify-end'}`}
     >
       <div
-        className={`max-w-[85%] sm:max-w-[75%] px-5 py-3 rounded-2xl shadow-sm leading-relaxed ${sizeClass} ${
+        className={`max-w-[85%] sm:max-w-[75%] px-6 py-4 rounded-3xl shadow-lg leading-relaxed ${sizeClass} ${
           isBot
-            ? 'bg-[#313244] border border-[#45475a] text-[#cdd6f4] rounded-bl-none'
-            : 'bg-[#89b4fa] text-[#1e1e2e] rounded-br-none shadow-md shadow-[#89b4fa]/10 font-medium'
+            ? 'bg-white dark:bg-slate-800 text-slate-800 dark:text-slate-100 border border-slate-200/50 dark:border-slate-700/50 rounded-tl-md'
+            : 'bg-gradient-to-br from-blue-600 via-indigo-600 to-violet-600 text-white rounded-tr-md shadow-xl shadow-blue-500/30'
         }`}
       >
         <div className="markdown-content">
           <ReactMarkdown
              components={{
-                p: ({node, ...props}) => <p className="mb-2 last:mb-0 leading-relaxed" {...props} />,
-                ul: ({node, ...props}) => <ul className="list-disc pl-4 mb-2 last:mb-0 space-y-1 leading-relaxed" {...props} />,
-                ol: ({node, ...props}) => <ol className="list-decimal pl-4 mb-2 last:mb-0 space-y-1 leading-relaxed" {...props} />,
-                li: ({node, ...props}) => <li className="my-1 leading-relaxed" {...props} />,
-                strong: ({node, ...props}) => <strong className={`font-bold ${isBot ? 'text-[#f5e0dc]' : 'text-[#1e1e2e]'}`} {...props} />,
-                em: ({node, ...props}) => <em className="italic opacity-80" {...props} />,
-                h1: ({node, ...props}) => <h1 className="text-lg font-black mb-2 tracking-tight" {...props} />,
-                h2: ({node, ...props}) => <h2 className="text-base font-bold mb-2 tracking-tight" {...props} />,
-                h3: ({node, ...props}) => <h3 className="text-sm font-bold mb-2 tracking-tight" {...props} />,
-                blockquote: ({node, ...props}) => (
-                  <blockquote className="border-l-4 border-[#b4befe] bg-[#1e1e2e]/30 pl-4 pr-3 py-2 my-2 rounded-r-lg text-[#bac2de]" {...props} />
+                p: ({...props}) => <p className="mb-2 last:mb-0 leading-relaxed" {...props} />,
+                ul: ({...props}) => <ul className="list-disc pl-4 mb-2 last:mb-0 space-y-1 leading-relaxed" {...props} />,
+                ol: ({...props}) => <ol className="list-decimal pl-4 mb-2 last:mb-0 space-y-1 leading-relaxed" {...props} />,
+                li: ({...props}) => <li className="my-1 leading-relaxed" {...props} />,
+                strong: ({...props}) => <strong className="font-bold" {...props} />,
+                em: ({...props}) => <em className="italic" {...props} />,
+                h1: ({...props}) => <h1 className="text-lg font-bold mb-2" {...props} />,
+                h2: ({...props}) => <h2 className="text-base font-bold mb-2" {...props} />,
+                h3: ({...props}) => <h3 className="text-sm font-bold mb-2" {...props} />,
+                blockquote: ({...props}) => (
+                  <blockquote className="border-l-4 border-blue-400 dark:border-blue-600 bg-blue-50/50 dark:bg-blue-900/20 pl-4 pr-3 py-2 my-2 rounded-r-xl text-slate-700 dark:text-slate-200" {...props} />
                 ),
              }}
           >
@@ -103,8 +94,10 @@ export const ChatMessage: React.FC<ChatMessageProps> = ({ message, fontSize = 'b
           </ReactMarkdown>
         </div>
         <div
-          className={`text-[10px] mt-1 opacity-60 ${
-            isBot ? 'text-[#6c7086]' : 'text-[#1e1e2e]/50'
+          className={`text-[10px] mt-2 pt-2 border-t ${
+            isBot 
+              ? 'border-slate-200/50 dark:border-slate-700/50 text-slate-400 dark:text-slate-500' 
+              : 'border-white/20 text-white/70'
           }`}
         >
           {message.timestamp.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}
