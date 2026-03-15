@@ -312,6 +312,11 @@ const App: React.FC = () => {
                   </p>
                 </div>
               </div>
+              <div className="hidden sm:block">
+                <p className="text-[10px] text-slate-400 font-bold tracking-[0.2em] uppercase bg-slate-100 px-3 py-1 rounded-full border border-slate-200">
+                  Créé par Azhar
+                </p>
+              </div>
             </div>
           </div>
         </header>
@@ -474,14 +479,10 @@ const App: React.FC = () => {
         </main>
 
         {/* Footer */}
-        <footer className="relative border-t border-slate-200/50 py-6 mt-8">
-          <div className="max-w-7xl mx-auto px-6 text-center space-y-2">
-            <div className="flex items-center justify-center gap-2 text-sm text-slate-500">
-              <Brain className="w-4 h-4" />
-              <span>Propulsé par Google Gemini AI</span>
-            </div>
-            <p className="text-xs text-slate-400 font-medium tracking-wide uppercase">
-              Créé par Azhar
+        <footer className="relative border-t border-slate-200/50 py-4 mt-8">
+          <div className="max-w-7xl mx-auto px-6 text-center">
+            <p className="text-[10px] text-slate-400 font-medium tracking-widest uppercase">
+              F93 Quiz • Excellence Infirmière
             </p>
           </div>
         </footer>
@@ -512,7 +513,12 @@ const App: React.FC = () => {
               </div>
               
               <div>
-                <h1 className="text-lg font-bold">{currentTopic.title}</h1>
+                <div className="flex items-center gap-2 mb-0.5">
+                  <h1 className="text-lg font-bold leading-none">{currentTopic.title}</h1>
+                  <span className="text-[10px] bg-white/20 px-2 py-0.5 rounded-full font-bold uppercase tracking-wider">
+                    par Azhar
+                  </span>
+                </div>
                 <div className="flex items-center gap-2 text-xs text-white/80">
                   <span className="px-2 py-0.5 bg-white/20 rounded-full">
                     {selectedMode === 'qcm' ? '📋 QCM' : '💬 Conversation'}
@@ -607,7 +613,7 @@ const App: React.FC = () => {
         </main>
 
         {/* Input Area */}
-        {selectedMode === 'chat' ? (
+        {selectedMode === 'chat' && (
           <footer className="bg-white/80 backdrop-blur-xl border-t border-slate-200/50 p-4">
             <form onSubmit={handleSendMessage} className="max-w-4xl mx-auto flex items-center gap-3">
               <input
@@ -628,17 +634,6 @@ const App: React.FC = () => {
                 <span className="hidden sm:inline">Envoyer</span>
               </button>
             </form>
-            <div className="text-center mt-3">
-              <p className="text-[10px] text-slate-400 font-medium tracking-widest uppercase">
-                Créé par Azhar
-              </p>
-            </div>
-          </footer>
-        ) : (
-          <footer className="bg-white/80 backdrop-blur-xl border-t border-slate-200/50 p-2 text-center">
-            <p className="text-[10px] text-slate-400 font-medium tracking-widest uppercase">
-              Créé par Azhar
-            </p>
           </footer>
         )}
       </div>
